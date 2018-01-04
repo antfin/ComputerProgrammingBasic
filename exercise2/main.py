@@ -15,4 +15,3 @@ def main(os):
 if __name__ == '__main__':
     os = operativesystem.OperativeSystem()
     main(os)
-        
