@@ -1,0 +1,17 @@
+{
+  "String": {
+    "Menu_DropDown_1": "Log",
+    "Menu_DropDown_1_Item_1": "View Log",
+    "Label_1": "Task Name:",
+    "Button_1": "Start",
+    "Button_2": "Finish",
+    "Button_3": "Pause",
+    "Button_4": "Resume",
+    "Button_5": "Break",
+    "Button_6": "Pomodoro"
+  },
+  "Colors": {
+  	"BackGround": "lightgrey",
+  	"ForeGround": "black"
+  }
+}
