@@ -13,7 +13,6 @@ class PomodoroTimer(tk.Tk):
     def __init__(self):
         super().__init__()
         self.config = config.Config()
-        print(self.config)
         self._initMenuBar()
         self._initTaskName()
         self._initTimer()
@@ -51,9 +50,7 @@ class PomodoroTimer(tk.Tk):
         self.start_button.pack(fill=tk.X, padx=50)
         self.pause_button = tk.Button(self.main_frame, text=self.config.data["String"]["Button_3"], bg=self.config.data["Colors"]["BackGround"], fg=self.config.data["Colors"]["ForeGround"], command=self._pause, font=self.standard_font, state="disabled")
         self.pause_button.pack(fill=tk.X, padx=50)        
-        #TO DO: Insert break/pomodoro button
-        #self.break_button = tk.Button(self.main_frame, text="Break", bg=self.config.data["Colors"]["BackGround"], fg=self.config.data["Colors"]["ForeGround"], command=self._changeBreakTime, font=self.standard_font)
-        #self.break_button.pack(fill=tk.X, padx=50)
+        #TODO: Insert break/pomodoro button 
         self.main_frame.pack(fill=tk.BOTH, expand=1)
 
     def _initShortcut(self):
@@ -63,17 +60,11 @@ class PomodoroTimer(tk.Tk):
         self.protocol("WM_DELETE_WINDOW", self._safe_destroy)
         
     def _changeBreakTime(self):        
-        #configure Break button callback
-        #self.break_button.configure(text="Pomodoro", command=self._changePomodoroTime)
-        #self.time_remaining_value = "5:00"
-        #self.time_remaining_var.set(self.time_remaining_value)
+        #TODO: configure Break button callback
         print("<ERROR>: Not implemented")
         
     def _changePomodoroTime(self):
-        #configure Pomodoro button callback
-        #self.break_button.configure(text="Break", command=self._changeBreakTime)
-        #self.time_remaining_value = "25:00"
-        #self.time_remaining_var.set(self.time_remaining_value)
+        #TODO: configure Pomodoro button callback
         print("<ERROR>: Not implemented")
 
     def _start(self):
