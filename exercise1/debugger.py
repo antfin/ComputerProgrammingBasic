@@ -24,6 +24,17 @@ class Debugger:
     
     def print_overflow_flag(self):        
         print("CPU Overflow Flag = {}".format(self.OVERFLOW_BIT)) 
+        
+            
+    def check_mean(self, number_of_data, result_index):  
+        total = 0
+        for i in range(0, number_of_data):   
+            total = total + self.cpu.DATA_MEMORY[i]
+        mean = int(total / number_of_data)              
+        if (mean == self.cpu.DATA_MEMORY[result_index]):
+            print("PASS: mean {} is correct".format(mean))
+        else:
+            print("FAIL: mean wrong, expected {} and calcualted {}".format(self.cpu.DATA_MEMORY[result_index], mean))
          
          
     # Debugger Constructor

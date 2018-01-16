@@ -14,7 +14,7 @@ import debugger
 class VirtualMicrocontroller:
     
     # Settings    
-    FREQUENCY_HZ = 10
+    FREQUENCY_HZ = 1000
     REGISTER_NUM = 4
     REGISTER_SIZE_BIT = 16 
     DATA_SIZE_BIT = 8 
@@ -71,7 +71,8 @@ class VirtualMicrocontroller:
         self.REGISTER_MAX_VALUE = math.pow(2, self.REGISTER_SIZE_BIT)
         self.REGISTER = [0 for x in range(self.REGISTER_NUM)]    
         self.DATA_MAX_VALUE = math.pow(2, self.DATA_SIZE_BIT)
-        self.DATA_MEMORY = [random.randint(0, self.DATA_MAX_VALUE - 1) for x in range(self.DATA_MEMORY_SIZE_BYTE)]
+        self.DATA_MEMORY = [random.randint(1, 10) for x in range(self.DATA_MEMORY_SIZE_BYTE)]
+        #self.DATA_MEMORY = [random.randint(0, self.DATA_MAX_VALUE - 1) for x in range(self.DATA_MEMORY_SIZE_BYTE)]
         self.debugger = debugger.Debugger(self)
         return
         
