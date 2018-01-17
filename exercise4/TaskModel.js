@@ -8,14 +8,19 @@ var TaskModel = function () {
  };
 
  TaskModel.prototype = {
-     addTask: function (task) {
-         this.tasks.push({
-             taskName: task,
-             taskStatus: 'uncompleted'
-         });
+     addTask: function (taskName) {
+		 var task = this.validateTask(taskName);
+		 if (task != undefined)
+		 {
+			 this.tasks.push(task);			 			 
+		 }
+		 else
+		 {
+			 alert("No Valid Task Name")
+		 }
          this.addTaskEvent.notify();
      },
-
+	 
      getTasks: function () {
          return this.tasks;
      },
@@ -33,6 +38,8 @@ var TaskModel = function () {
 		 
          for (var index in selectedTasks) {
              this.tasks[selectedTasks[index]].taskStatus = 'completed';
+			 this.tasks[selectedTasks[index]].taskColor = "green";
+			 this.tasks[selectedTasks[index]].taskSize = "110%";
          }
          this.setTasksAsCompletedEvent.notify();
          this.selectedTasks = [];
@@ -47,5 +54,24 @@ var TaskModel = function () {
          // clear the selected tasks
          this.selectedTasks = [];
          this.deleteTasksEvent.notify();
+     },
+
+     validateTask: function (taskName) {
+         var task = {
+			taskName: taskName,
+			taskStatus: 'uncompleted'
+		 };
+		         
+		 if (taskName != "")
+		 {
+			 task.taskColor = "black";
+			 task.taskSize = "100%";
+		 }
+		 else
+		 {
+			 task = undefined;
+		 }
+		 
+		 return task;
      }
  };

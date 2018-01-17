@@ -10,44 +10,9 @@ var TaskView = function (model) {
 
 TaskView.prototype = {
     init: function () {
-        this.createChildren()
-            .setupHandlers()
-            .enable();
-    },
-
-    createChildren: function () {
-        // Cache the document object
-        this.$container = $('#AppContainer');
-        this.$addTaskButton = this.$container.find('#AddButton');
-        this.$taskTextBox = this.$container.find('#TaskName');
-        this.$tasksContainer = this.$container.find('#TaskList');
-        return this;
-    },
-
-    setupHandlers: function () {
-        this.addTaskButtonHandler = this.addTaskButton.bind(this);
-        this.selectOrUnselectTaskHandler = this.selectOrUnselectTask.bind(this);
-        this.completeTaskButtonHandler = this.completeTaskButton.bind(this);
-        this.deleteTaskButtonHandler = this.deleteTaskButton.bind(this);
-        // Handlers from Event Dispatcher        
-        this.addTaskHandler = this.addTask.bind(this);
-        this.clearTaskTextBoxHandler = this.clearTaskTextBox.bind(this);
-        this.setTasksAsCompletedHandler = this.setTasksAsCompleted.bind(this);
-        this.deleteTasksHandler = this.deleteTasks.bind(this);
-        return this;
-    },
-
-    enable: function () {
-        this.$addTaskButton.click(this.addTaskButtonHandler);
-        this.$container.on('click', '.js-task', this.selectOrUnselectTaskHandler);
-        this.$container.on('click', '#CompleteButton', this.completeTaskButtonHandler);
-        this.$container.on('click', '#DeleteButton', this.deleteTaskButtonHandler);
-        // Event Dispatcher
-        this.model.addTaskEvent.attach(this.addTaskHandler);
-        this.model.addTaskEvent.attach(this.clearTaskTextBoxHandler);
-        this.model.setTasksAsCompletedEvent.attach(this.setTasksAsCompletedHandler);
-        this.model.deleteTasksEvent.attach(this.deleteTasksHandler);
-        return this;
+        this._createChildren()
+            ._setupHandlers()
+            ._enable();
     },
 
     addTaskButton: function () {
@@ -80,45 +45,73 @@ TaskView.prototype = {
         }
     },
 
-    show: function () {
-        this.buildList();
-    },
-
     buildList: function () {
+        var $tasksContainer = this.$tasksContainer;
         var tasks = this.model.getTasks();
         var html = "";
-        var $tasksContainer = this.$tasksContainer;
         var index = 0;
 		
         $tasksContainer.html('');
         for (var task in tasks) {
-            if (tasks[task].taskStatus == 'completed') {
-                html = "<div style='color:green;font-size:110%;'>";
-            } else {
-                html = "<div>";
-            }
+			html = "<div style='color:" + tasks[task].taskColor + ";font-size:" + tasks[task].taskSize+ ";'>";
             $tasksContainer.append(html + "<label><input type='checkbox' class='js-task' data-index='" + index + "' data-task-selected='false'>" + tasks[task].taskName + "</label></div>");
             index++;
         }
     }, 
+	
 
-    /* -------------------- Handlers From Event Dispatcher ----------------- */
-    clearTaskTextBox: function () {
+    _createChildren: function () {
+        // Cache the document object
+        this.$container = $('#AppContainer');
+        this.$addTaskButton = this.$container.find('#AddButton');
+        this.$taskTextBox = this.$container.find('#TaskName');
+        this.$tasksContainer = this.$container.find('#TaskList');
+        return this;
+    },
+
+    _setupHandlers: function () {
+        this.addTaskButtonHandler = this.addTaskButton.bind(this);
+        this.selectOrUnselectTaskHandler = this.selectOrUnselectTask.bind(this);
+        this.completeTaskButtonHandler = this.completeTaskButton.bind(this);
+        this.deleteTaskButtonHandler = this.deleteTaskButton.bind(this);
+        // Handlers from Event Dispatcher        
+        this.addTaskHandler = this._addTaskEvent.bind(this);
+        this.clearTaskTextBoxHandler = this._clearTaskTextBoxEvent.bind(this);
+        this.setTasksAsCompletedHandler = this._setTasksAsCompletedEvent.bind(this);
+        this.deleteTasksHandler = this._deleteTasksEvent.bind(this);
+        return this;
+    },
+
+    _enable: function () {
+        this.$addTaskButton.click(this.addTaskButtonHandler);
+        this.$container.on('click', '.js-task', this.selectOrUnselectTaskHandler);
+        this.$container.on('click', '#CompleteButton', this.completeTaskButtonHandler);
+        this.$container.on('click', '#DeleteButton', this.deleteTaskButtonHandler);
+        // Event Dispatcher
+        this.model.addTaskEvent.attach(this.addTaskHandler);
+        this.model.addTaskEvent.attach(this.clearTaskTextBoxHandler);
+        this.model.setTasksAsCompletedEvent.attach(this.setTasksAsCompletedHandler);
+        this.model.deleteTasksEvent.attach(this.deleteTasksHandler);
+        return this;
+    },
+	
+    _clearTaskTextBoxEvent: function () {
         this.$taskTextBox.val('');
     },
 
-    addTask: function () {
-        this.show();
+    _addTaskEvent: function () {
+        this._show();
     },
 
-    setTasksAsCompleted: function () {
-        this.show();
-
+    _setTasksAsCompletedEvent: function () {
+        this._show();
     },
 
-    deleteTasks: function () {
-        this.show();
+    _deleteTasksEvent: function () {
+        this._show();
+    },
 
+    _show: function () {
+        this.buildList();
     }
-    /* -------------------- End Handlers From Event Dispatcher ----------------- */
 };
