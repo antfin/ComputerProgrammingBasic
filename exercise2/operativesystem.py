@@ -10,7 +10,7 @@ import filesystem
 import scheduler
 
 
-class OperativeSystem:        
+class OperativeSystem:
     # OS commands    
     def _help_commands(self):
         self.driver.write_output("Commands supported by pOS are:")    
@@ -27,7 +27,7 @@ class OperativeSystem:
         files = self.filesystem.list_files(directory_name) 
         if files: 
             for file in files:
-                    self.driver.write_output(file)
+                self.driver.write_output(file)
         else:
             self.driver.log_error("Directory not Exist")  
         

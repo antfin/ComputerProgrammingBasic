@@ -1,0 +1,42 @@
+<div class="container">	
+	<br>					
+	<h3>Settings</h3>	
+	<br>	
+	<div class="row">					
+		<div class="form-group">
+			<label class="control-label col-sm-1">Group File:</label>
+			<div class="col-sm-10">
+		  		<input class="form-control" id="groupFile" placeholder="Enter filename" value="{{group}}">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group">
+			<label class="control-label col-sm-1">Task File:</label>
+			<div class="col-sm-10">
+		  		<input class="form-control" id="taskFile" placeholder="Enter filename" value="{{task}}">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group">
+			<label class="control-label col-sm-1">Color File:</label>
+			<div class="col-sm-10">
+		  		<input class="form-control" id="colorFile" placeholder="Enter filename" value="{{color}}">
+			</div>
+		</div>
+	</div>
+	<br>	
+	<div class="row">
+		<div class="form-group">
+	    	<div class="col-sm-offset-1 col-sm-10">
+	     	 	<button id="saveButton" type="submit" class="btn btn-default">Save</button>
+	    	</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="/settings.js"></script>
+<script type="text/javascript">
+	configureSubmit();
+</script> 

@@ -1,0 +1,15 @@
+body
+{
+	padding-top: 30px; 
+	padding-bottom: 60px;
+}
+.container {
+	  width: 95%;
+}
+.navbar-header .navbar-brand{
+    color: white;
+}
+.navbar-header .navbar-brand:hover{
+    color: black;
+    background-color: white;
+}
